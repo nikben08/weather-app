@@ -21,9 +21,14 @@ To run this project locally, you need to have Node.js and npm (Node Package Mana
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/weather-app.git
+   git clone https://github.com/nikben08/weather-app.git
 
-2. Run npm install
+2. Install Node.js dependencies using npm:
+    ```bash
+    npm install
+    ```
 
-   ```bash
-   npm install
+3.  Build the frontend assets:
+    ```bash
+    npm run dev
+    ```
