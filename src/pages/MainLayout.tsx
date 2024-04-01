@@ -26,7 +26,7 @@ export default function MainLayout() {
           p: 1,
           minHeight: "100vh",
           height: "100%",
-          paddingTop: 12,
+          paddingTop: 8,
         }}
       >
         <Outlet />

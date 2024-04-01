@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Select from 'react-select';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import citiesData from '../data/cities.json';
@@ -6,6 +6,7 @@ import { useQuery } from 'react-query';
 import parseResponse from '../functions/parseResponse';
 import { ApiResponse, ICityWeatherData } from '../app/types';
 import { getCitiesWeatherDataReq } from '../api/getCitiesReq';
+import { MultiValue } from 'react-select/animated';
 
 interface Option {
     id: number;
@@ -34,7 +35,7 @@ function AppBarCitySelect() {
 
     const {
         data: cityWeatherData,
-        isLoading: isCityWeatherDataLoading,
+        // isLoading: isCityWeatherDataLoading,
         refetch: refetchCityWeatherData,
     } = useQuery("get/CitiesWeatherData", () => getCitiesWeatherDataReq(getCityIds(filteredCities)), {
         cacheTime: 0,
@@ -79,7 +80,7 @@ function AppBarCitySelect() {
                 const temperature = cityWeatherData.list[index]?.main.temp; // Access temperature property
                 options.push({
                     value: city.name,
-                    label: `${city.country}/${city.name}/${ Math.floor(temperature - 273.15) }`,
+                    label: `${city.country}/${city.name}/${ Math.floor(temperature - 273.15) } °C`,
                     id: city.id,
                     weather: temperature ? temperature : 0, // Set default value if temperature is undefined
                 });
@@ -89,34 +90,42 @@ function AppBarCitySelect() {
     };
 
     const customStyles = {
-        control: (provided, state) => ({
+        control: (provided: any, state: any) => ({
             ...provided,
             width: 300, // Adjust the width as needed
             backgroundColor: theme.palette.mode === 'light' ? 'white' : 'black', // Background color based on theme mode
             textAlign: 'left', // Align text to the left
         }),
-        option: (provided, state) => ({
+        option: (provided: any, state: any) => ({
             ...provided,
             backgroundColor: state.isSelected ? (theme.palette.mode === 'light' ? 'lightgray' : 'darkgray') : null, // Background color for selected option
             color: theme.palette.mode === 'light' ? 'black' : 'white', // Font color based on theme mode
         }),
-        singleValue: (provided, state) => ({
+        singleValue: (provided: any, state: any) => ({
             ...provided,
             color: theme.palette.mode === 'light' ? 'black' : 'white', // Font color based on theme mode
         }),
-        menu: (provided, state) => ({
+        menu: (provided: any, state: any) => ({
             ...provided,
             backgroundColor: theme.palette.mode === 'light' ? 'white' : 'black', // Background color of the dropdown menu
             color: theme.palette.mode === 'light' ? 'black' : 'white', // Font color of the dropdown menu
             textAlign: 'left', // Align text to the left
             overflowY: 'auto', // Add scrollbar if the content exceeds the height
         }),
-        dropdownIndicator: (provided, state) => ({ // Remove dropdown indicator
+        dropdownIndicator: (provided: any, state: any) => ({ // Remove dropdown indicator
             ...provided,
             display: 'none',
         }),
         indicatorSeparator: () => ({}) // Remove indicator separator
     };
+
+    const CustomOption = ({ data, ...props }: any) => (
+        <div>
+            <span>{data.label}</span>
+            {data.weather && (<span>111</span>)} {/* Render WeatherIcon if weather data is available */}
+        </div>
+    );
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -128,6 +137,7 @@ function AppBarCitySelect() {
                 noOptionsMessage={() => 'Aranan seçenek bulunamadı!'}
                 styles={customStyles}
                 onInputChange={handleInputChange}
+                components={{ Option: CustomOption }}
             />
         </ThemeProvider>
     );

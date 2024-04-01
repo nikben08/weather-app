@@ -1,139 +1,164 @@
-import { Avatar, Grid, Paper, Skeleton, Typography } from "@mui/material";
-import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import LayersIcon from "@mui/icons-material/Layers";
-import ErrorIcon from "@mui/icons-material/Error";
-import DoneIcon from '@mui/icons-material/Done';
-import LoopIcon from '@mui/icons-material/Loop';
-import StackedLineChartIcon from '@mui/icons-material/StackedLineChart';
-import { useState } from "react";
+import { Grid, ListItemAvatar, ListItemSecondaryAction, Typography } from "@mui/material";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Image from '../images/weather-forcasting-card-background.png';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import ThermometerSimpleLight from '../assets/thermometer-simple-light.svg';
+import ClounRainLight from '../assets/cloud-rain-light.svg';
+import WindLight from '../assets/wind-light.svg';
+import DropLight from '../assets/drop-light.svg';
+import SunDumLight from '../assets/sun-dim-light.svg';
+import RainIcon from '../assets/rain.svg';
+
+const listStyle = {
+  py: 0,
+  width: '100%',
+  maxWidth: 360,
+  borderRadius: 2,
+  borderColor: 'divider',
+  backgroundColor: 'background.paper',
+  marginTop: 2,
+};
+
+const itemTextStyle = {
+  color: '#BFBFD4',
+  fontFamily: 'Nunito',
+  fontSize: '14px',
+  lineHeight: '140%',
+  fontWeight: 700,
+};
+
+const itemTypographyStyle = {
+  color: '#FAFAFA',
+  fontFamily: 'Nunito',
+  fontStyle: 'normal',
+  fontSize: '16px',
+  lineHeight: '140%',
+  fontWeight: 500,
+};
+
 
 function WeatherForcastPage() {
-
-  const [companyStatisticsIsLoading, setCompanyStatisticsIsLoading] = useState<boolean>(true);
-  const statisticsData = [
-    {
-      name: "HATA SAYISI",
-      count: 1,
-      icon: <ErrorIcon sx={{ fontSize: "28px" }} />,
-      bgColor: "#F04438",
-      color: "#9EA3AB",
-      isActive: true,
-    },
-    {
-      name: "PERSONEL",
-      count: 2,
-      icon: <PeopleAltOutlinedIcon sx={{ fontSize: "28px" }} />,
-      bgColor: "#10B981",
-      color: "#9EA3AB",
-      isActive: true,
-
-    },
-    {
-      name: "TEZGAH",
-      count: 3,
-      icon: <LayersIcon sx={{ fontSize: "28px" }} />,
-      bgColor: "#F79009",
-      color: "#9EA3AB",
-      isActive: true,
-    },
-    {
-      name: "AKTİF İŞLEM",
-      count: 4,
-      icon: <LoopIcon sx={{ fontSize: "28px" }} />,
-      bgColor: "#6366F1",
-      color: "#9EA3AB",
-      isActive: true,
-    },
-    {
-      name: "TAMAMLANAN",
-      count: 5,
-      icon: <DoneIcon sx={{ fontSize: "28px" }} />,
-      bgColor: "#63BF9E",
-      color: "#9EA3AB",
-      isActive: true,
-    },
-    {
-      name: "İŞLEM SAYISI",
-      count: 6,
-      icon: <StackedLineChartIcon sx={{ fontSize: "28px" }} />,
-      bgColor: "#44ACF2",
-      color: "#9EA3AB",
-      isActive: true,
-    },
-  ];
-
   return (
-    <Grid container item xl={12} spacing={3} style={{ height: '100%' }}>
-      <Grid container item xl={12} spacing={1} >
-        {companyStatisticsIsLoading ? (
-          statisticsData.map((value, key) => (
-            <Grid key={key} item xs={12} sm={6} md={6} lg={3} xl={2}>
-              <Paper className="border-1 border-[#f1f1f4] flex !flex-col p-3" sx={{ borderRadius: '18px', color: value.color }}>
-                <Grid item>
-                  <Typography variant="h5">
-                    <Skeleton />
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Skeleton variant="rectangular" height={70} />
-                </Grid>
-                <Grid item>
-                  <Typography variant="h5">
-                    <Skeleton />
-                  </Typography>
-                </Grid>
-              </Paper>
-            </Grid>
-          ))
-        ) : (
-          statisticsData.filter(data => data.isActive).map((value, key) => (
-            <Grid key={key} item xs={12} sm={6} md={6} lg={3} xl={2}>
-              <Paper
-                className="border-1 border-[#f1f1f4] flex !flex-col p-3"
-                sx={{ borderRadius: "18px" }}
-              >
-                <Grid
-                  container
-                  justifyContent="space-between"
-                  alignItems="flex-start"
-                  spacing={2}
-                >
-                  <Grid item>
-                    <Typography
-                      sx={{
-                        fontSize: 13,
-                        fontWeight: 500,
-                        marginLeft: 1,
-                        marginTop: 2,
-                        color: value.color,
-                        fontFamily: "Ubuntu, sans-serif",
-                      }}
-                    >
-                      {value.name}
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Avatar
-                      sx={{
-                        marginTop: 1,
-                        marginRight: 1,
-                        bgcolor: value.bgColor,
-                        width: 56,
-                        height: 56,
-                      }}
-                    >
-                      {value.icon}
-                    </Avatar>
-                  </Grid>
-                </Grid>
-                <Typography variant="h2" sx={{ marginLeft: 1 }}>
-                  {value.count}
-                </Typography>
-              </Paper>
-            </Grid>
-          ))
-        )}
-      </Grid>
+    <Grid container item xl={12} style={{ height: '100%' }}>
+      <Card
+        sx={{
+          width: 300,
+          height: 300,
+          backgroundImage: `url(${Image})`,
+          backgroundSize: '100% 100%',
+          backgroundPosition: 'center',
+        }}
+      >
+        <CardContent>
+          {/* Content of the card */}
+        </CardContent>
+      </Card>
+
+      <List sx={{ ...listStyle, backgroundColor: '#16161F' }}>
+        <ListItem>
+          <ListItemAvatar>
+            <img src={ThermometerSimpleLight} alt="Thermometer Icon" />
+          </ListItemAvatar>
+          <ListItemText  disableTypography  sx={{ ...itemTextStyle }} primary="Thermal sensation" />
+          <ListItemSecondaryAction>
+            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">26ºc</Typography>
+          </ListItemSecondaryAction>
+        </ListItem>
+        <Divider sx={{ borderColor: '#1C1C27' }} variant="middle" component="li" />
+        <ListItem>
+          <ListItemAvatar>
+            <img src={ClounRainLight} alt="Thermometer Icon" />
+          </ListItemAvatar>
+          <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="Probability of rain" />
+          <ListItemSecondaryAction>
+            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">0%</Typography>
+          </ListItemSecondaryAction>
+        </ListItem>
+        <Divider sx={{ borderColor: '#1C1C27' }} variant="middle" component="li" />
+        <ListItem>
+          <ListItemAvatar>
+            <img src={WindLight} alt="Wind speed" />
+          </ListItemAvatar>
+          <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="Wind speed" />
+          <ListItemSecondaryAction>
+            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">8 km/h</Typography>
+          </ListItemSecondaryAction>
+        </ListItem>
+        <Divider sx={{ borderColor: '#1C1C27' }} variant="middle" component="li" />
+        <ListItem>
+          <ListItemAvatar>
+            <img src={DropLight} alt="Thermometer Icon" />
+          </ListItemAvatar>
+          <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="Air humidity" />
+          <ListItemSecondaryAction>
+            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">40%</Typography>
+          </ListItemSecondaryAction>
+        </ListItem>
+        <Divider sx={{ borderColor: '#1C1C27' }} variant="middle" component="li" />
+        <ListItem>
+          <ListItemAvatar>
+            <img src={SunDumLight} alt="Thermometer Icon" />
+          </ListItemAvatar>
+          <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="UV Index" />
+          <ListItemSecondaryAction>
+            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">5</Typography>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </List>
+
+      <Card sx={{ width: 300, height: 150, marginTop: 2 }}>
+      <CardContent>
+        <Grid container spacing={4}>
+          {/* Section 1 */}
+          <Grid item xs={2}>
+            <Typography variant="h6">Mon</Typography>
+            <img src={RainIcon} alt="Thermometer Icon" />
+            <Typography variant="body1">20°C</Typography>
+            <Typography variant="body2">Feels like 18°C</Typography>
+          </Grid>
+          {/* Section 2 */}
+          <Grid item xs={2}>
+            <Typography variant="h6">Tue</Typography>
+            <img src={RainIcon} alt="Thermometer Icon" />
+            <Typography variant="body1">22°C</Typography>
+            <Typography variant="body2">Feels like 20°C</Typography>
+          </Grid>
+          {/* Section 3 */}
+          <Grid item xs={2}>
+            <Typography variant="h6">Wed</Typography>
+            <img src={RainIcon} alt="Thermometer Icon" />
+            <Typography variant="body1">25°C</Typography>
+            <Typography variant="body2">Feels like 23°C</Typography>
+          </Grid>
+          {/* Section 4 */}
+          <Grid item xs={2}>
+            <Typography variant="h6">Thu</Typography>
+            <img src={RainIcon} alt="Thermometer Icon" />
+            <Typography variant="body1">24°C</Typography>
+            <Typography variant="body2">Feels like 22°C</Typography>
+          </Grid>
+          {/* Section 5 */}
+          <Grid item xs={2}>
+            <Typography variant="h6">Fri</Typography>
+            <img src={RainIcon} alt="Thermometer Icon" />
+            <Typography variant="body1">23°C</Typography>
+            <Typography variant="body2">Feels like 21°C</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="h6">Fri</Typography>
+            <img src={RainIcon} alt="Thermometer Icon" />
+            <Typography variant="body1">23°C</Typography>
+            <Typography variant="body2">Fee21°C</Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
+
+
     </Grid>
   );
 }
