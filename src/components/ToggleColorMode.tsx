@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PaletteMode } from '@mui/material';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 
 import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';

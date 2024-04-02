@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import { useMemo, useState } from 'react';
 import Select from 'react-select';
 

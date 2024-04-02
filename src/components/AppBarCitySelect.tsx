@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import Select from 'react-select';
-import { ThemeProvider, useTheme } from '@mui/material/styles';
+import { ThemeProvider, useTheme } from '@mui/material';
 import citiesData from '../data/cities.json';
 import { useQuery } from 'react-query';
 import parseResponse from '../functions/parseResponse';
 import { ApiResponse, ICityWeatherData } from '../app/types';
 import { getCitiesWeatherDataReq } from '../api/getCitiesReq';
-import { MultiValue } from 'react-select/animated';
+// import { MultiValue } from 'react-select/animated';
 
 interface Option {
     id: number;
