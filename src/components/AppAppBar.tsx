@@ -99,6 +99,7 @@ function AppAppBar({ mode}: AppAppBarProps) {
                 alignItems: 'center',
               }}
             >
+            
             </Box>
 
             <Box sx={{ display: { sm: '', md: 'none' } }}>
@@ -108,7 +109,7 @@ function AppAppBar({ mode}: AppAppBarProps) {
                 aria-label="menu"
                 onClick={toggleDrawer(true)}
                 sx={{ minWidth: '30px', p: '4px' }}
-              >
+              > 
                 <MenuIcon />
               </Button>
               <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
@@ -119,7 +120,7 @@ function AppAppBar({ mode}: AppAppBarProps) {
                     backgroundColor: 'background.paper',
                     flexGrow: 1,
                   }}
-                >
+                > 
                   <Box
                     sx={{
                       display: 'flex',
