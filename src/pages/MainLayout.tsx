@@ -21,14 +21,11 @@ export default function MainLayout() {
     }
    });
 
-  const toggleColorMode = () => {
-    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      <AppAppBar mode={mode}  />
       <Box
         component="main"
         className="overflow-hidden"

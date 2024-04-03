@@ -186,18 +186,17 @@ function WeatherForcastPage() {
           height: 0,
           width: 0,
           ...(isDesktop && {
-            width: 800,
+            width: 820,
             height: 350,
             marginLeft: 3
           }),
         }}
       >
         <CardContent sx={{ padding: 0, margin: 0 }}>
-          <Stack sx={{ width: '100%'}}>
-            <Box sx={{ width: '100%'}}>
+          <Stack sx={{ width: '100%', backgroundColor: '#16161F' }}>
+            <Box sx={{ width: '100%' }}>
               <Box sx={{ padding: 0, margin: 0 }}> {/* Adjust padding */}
                 <ResponsiveChartContainer
-                
                   series={series}
                   xAxis={[
                     {
@@ -249,7 +248,7 @@ function WeatherForcastPage() {
           }),
         }}
       >
-        <ListItem >
+        <ListItem>
           <ListItemAvatar>
             <img src={ThermometerSimpleLight} alt="Thermometer Icon" />
           </ListItemAvatar>
@@ -305,12 +304,13 @@ function WeatherForcastPage() {
           width: '100%',
           height: 300,
           marginTop: 2,
+          backgroundColor: '#16161F',
           ...(isDesktop && {
             height: 160,
           }),
         }}>
-        <CardContent>
-          <Grid container spacing={1} >
+        <CardContent sx={{ backgroundColor: '#16161F', }}>
+          <Grid container spacing={1}>
 
             <Grid item xs={3} xl={1}>
               <Typography variant="h6">Mon</Typography>
