@@ -28,12 +28,13 @@ import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
 import { ChartsYAxis } from '@mui/x-charts/ChartsYAxis';
 import { ChartsGrid } from '@mui/x-charts/ChartsGrid';
 import { ChartsTooltip } from '@mui/x-charts/ChartsTooltip';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelectedCityIds } from "../stores/WeatherForcastingStore";
 import { getCitiesWeatherDataReq } from "../api/getCitiesReq";
 import { useQuery } from "react-query";
 import parseResponse from "../functions/parseResponse";
 import { ApiResponse, ICityWeatherData } from "../app/types";
+import { useNavigate } from "react-router-dom";
 
 const dataset = [
   { min: -12, max: -4, precip: 79, month: 'Jan' },
@@ -77,10 +78,16 @@ const itemTypographyStyle = {
 
 
 function WeatherForcastPage() {
+  const navigate = useNavigate();
   const selectedCityIds = useSelectedCityIds();
   console.log(selectedCityIds);
   const isDesktop = useMediaQuery('(min-width: 900px)'); // Change breakpoint as needed
 
+  useEffect(() => {
+    if (selectedCityIds === undefined){
+      navigate('/');
+    }
+  }, []);
   const {
     data: cityWeatherData,
     isLoading: isCityWeatherDataLoading,
