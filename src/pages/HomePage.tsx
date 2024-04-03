@@ -1,5 +1,6 @@
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import CityMultiSelect from "../components/CityMultiSelect";
+import PlaceIcon from '@mui/icons-material/Place';
 
 function HomePage() {
   return (
@@ -51,10 +52,28 @@ function HomePage() {
         </Typography>
 
         <Grid
-        sx={{
-          marginTop: 3,
-        }}>
+          sx={{
+            marginTop: 3,
+          }}>
+          <Button 
+          variant="contained"
+          sx={{
+            marginBottom: 2,
+            width: 400,
+          }}
+          >
+            Mevcut Konumu Kullan <PlaceIcon />
+            </Button>
           <CityMultiSelect />
+          <Button
+            variant="outlined"
+            sx={{
+              marginTop: 5,
+              width: 400,
+            }}
+          >
+            Ara
+          </Button>
         </Grid>
       </Grid>
 
