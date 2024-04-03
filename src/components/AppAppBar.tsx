@@ -99,15 +99,6 @@ function AppAppBar({ mode}: AppAppBarProps) {
                 alignItems: 'center',
               }}
             >
-              <AppBarCitySelect />
-            </Box>
-            <Box
-              sx={{
-                display: { xs: 'none', md: 'flex' },
-                gap: 0.5,
-                alignItems: 'center',
-              }}
-            >
             </Box>
 
             <Box sx={{ display: { sm: '', md: 'none' } }}>

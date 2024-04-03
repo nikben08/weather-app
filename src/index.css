@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rmsc.dark {
+    --rmsc-main: #1E1E29;
+    --rmsc-hover: #3B3B54;
+    --rmsc-selected: #1E1E29;
+    --rmsc-border: #1E1E29;
+    --rmsc-gray: #555555;
+    --rmsc-bg: #1E1E29;
+    color: #fff;
+  }

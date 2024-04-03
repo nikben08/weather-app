@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import WeatherForcastPage from "../pages/WeatherForcastPage";
 import MainLayout from "../pages/MainLayout";
+import HomePage from "../pages/HomePage";
 
 const routes = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const routes = createBrowserRouter([
         path: "weather-forcast",
         element: <WeatherForcastPage />,
       },
+      {
+        path: "/",
+        element: <HomePage />,
+      }
     ],
   },
   {
