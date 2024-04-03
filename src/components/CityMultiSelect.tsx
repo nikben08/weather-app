@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Select from 'react-select';
 import citiesData from '../data/cities.json';
 import { City } from '../app/types';
+import { Button } from '@mui/material';
+import PlaceIcon from '@mui/icons-material/Place';
+import { useNavigate } from 'react-router-dom';
+import { getWeatherForcastingActions } from '../stores/WeatherForcastingStore';
 
 interface Option {
+  id: number;
   value: number;
   label: string;
 }
@@ -45,28 +50,63 @@ const customStyles = {
 };
 
 const CityMultiSelect = () => {
+  const { setSelectedCityIds } = getWeatherForcastingActions();
+  const navigate = useNavigate();
   const cities: City[] = citiesData;
   const [filteredOptions, setFilteredOptions] = useState<Option[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
   const filterOptions = (inputValue: string) => {
     const filteredCities = cities.filter(city =>
       city.name.toLowerCase().includes(inputValue.toLowerCase())
     ).slice(0, 20); // Limit to first 20 filtered cities
     const filteredOptions = filteredCities.map(city => ({
+      id: city.id,
       value: city.id,
       label: `${city.name}, ${city.country}`
     }));
     setFilteredOptions(filteredOptions);
   };
 
+  const handleSelectChange = (selectedOptions: Option[]) => {
+    setSelectedOptions(selectedOptions);
+  };
+
+
+  const handleGetWeatherForcast = () => {
+    const selectedCityIds = selectedOptions.map(option => option.id); // Extract IDs from selectedOptions
+    setSelectedCityIds(selectedCityIds); // Set only the list of IDs
+    navigate('/weather-forcast');
+  }
+
   return (
     <>
+      <Button
+        variant="contained"
+        sx={{
+          marginBottom: 2,
+          width: 400,
+        }}
+      >
+        Mevcut Konumu Kullan <PlaceIcon />
+      </Button>
       <Select
         options={filteredOptions}
         onInputChange={filterOptions}
         isMulti={true}
+        onChange={handleSelectChange}
         styles={customStyles}
       />
+      <Button
+        onClick={handleGetWeatherForcast}
+        variant="outlined"
+        sx={{
+          marginTop: 5,
+          width: 400,
+        }}
+      >
+        Ara
+      </Button>
     </>
   );
 };

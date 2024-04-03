@@ -21,17 +21,19 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 
 import { ResponsiveChartContainer } from '@mui/x-charts/ResponsiveChartContainer';
 import { LinePlot, MarkPlot } from '@mui/x-charts/LineChart';
-import { BarPlot } from '@mui/x-charts/BarChart';
 import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
 import { ChartsYAxis } from '@mui/x-charts/ChartsYAxis';
 import { ChartsGrid } from '@mui/x-charts/ChartsGrid';
 import { ChartsTooltip } from '@mui/x-charts/ChartsTooltip';
 import { useState } from "react";
+import { useSelectedCityIds } from "../stores/WeatherForcastingStore";
+import { getCitiesWeatherDataReq } from "../api/getCitiesReq";
+import { useQuery } from "react-query";
+import parseResponse from "../functions/parseResponse";
+import { ApiResponse, ICityWeatherData } from "../app/types";
 
 const dataset = [
   { min: -12, max: -4, precip: 79, month: 'Jan' },
@@ -75,10 +77,23 @@ const itemTypographyStyle = {
 
 
 function WeatherForcastPage() {
-  const [reverseX, setReverseX] = useState(false);
-  const [reverseLeft, setReverseLeft] = useState(false);
-  const [reverseRight, setReverseRight] = useState(false);
+  const selectedCityIds = useSelectedCityIds();
+  console.log(selectedCityIds);
   const isDesktop = useMediaQuery('(min-width: 900px)'); // Change breakpoint as needed
+
+  const {
+    data: cityWeatherData,
+    isLoading: isCityWeatherDataLoading,
+    refetch: refetchCityWeatherData,
+  } = useQuery("get/CitiesWeatherData", () => getCitiesWeatherDataReq(selectedCityIds?.join(',') ?? ''), {
+    cacheTime: 0,
+    retry: 1,
+    select: parseResponse as (
+      response: ApiResponse<ICityWeatherData>
+    ) => ICityWeatherData,
+  });
+
+  console.log(cityWeatherData);
 
   return (
     <Grid container item xl={12} style={{ height: '100%' }}>
@@ -203,12 +218,11 @@ function WeatherForcastPage() {
                       scaleType: 'band',
                       dataKey: 'month',
                       label: 'Month',
-                      reverse: reverseX,
                     },
                   ]}
                   yAxis={[
-                    { id: 'leftAxis', reverse: reverseLeft },
-                    { id: 'rightAxis', reverse: reverseRight },
+                    { id: 'leftAxis' },
+                    { id: 'rightAxis' },
                   ]}
                   dataset={dataset}
                   height={350}

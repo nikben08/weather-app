@@ -51,29 +51,8 @@ function HomePage() {
           Choose a location to see the weather forecast
         </Typography>
 
-        <Grid
-          sx={{
-            marginTop: 3,
-          }}>
-          <Button 
-          variant="contained"
-          sx={{
-            marginBottom: 2,
-            width: 400,
-          }}
-          >
-            Mevcut Konumu Kullan <PlaceIcon />
-            </Button>
+        <Grid sx={{ marginTop: 3 }}>
           <CityMultiSelect />
-          <Button
-            variant="outlined"
-            sx={{
-              marginTop: 5,
-              width: 400,
-            }}
-          >
-            Ara
-          </Button>
         </Grid>
       </Grid>
 
