@@ -6,8 +6,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import ThermometerSimpleLight from '../assets/phosphor-thermometer-simple-light.svg';
-import ClounRainLight from '../assets/phosphor-cloud-rain-light.svg';
 import WindLight from '../assets/phosphor-wind-light.svg';
 import DropLight from '../assets/phosphor-drop-light.svg';
 import SunDumLight from '../assets/phosphor-sun-dim-light.svg';
@@ -35,6 +33,11 @@ import { useQuery } from "react-query";
 import parseResponse from "../functions/parseResponse";
 import { ApiResponse, ICityWeatherData } from "../app/types";
 import { useNavigate } from "react-router-dom";
+import ThermalSensation from "../components/ThermalSensation";
+import ProbabilityOfRain from "../components/ProbabilityOfRain";
+import WindSpeed from "../components/WindSpeed";
+import AirHumidity from "../components/AirHumidity";
+import UVIndex from "../components/UVIndex";
 
 const dataset = [
   { min: -12, max: -4, precip: 79, month: 'Jan' },
@@ -269,55 +272,15 @@ function WeatherForcastPage() {
           }),
         }}
       >
-        <ListItem>
-          <ListItemAvatar>
-            <img src={ThermometerSimpleLight} alt="Thermometer Icon" />
-          </ListItemAvatar>
-          <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="Thermal sensation" />
-          <ListItemSecondaryAction>
-            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">26ºc</Typography>
-          </ListItemSecondaryAction>
-        </ListItem>
+     <ThermalSensation/>
         <Divider sx={{ borderColor: '#1C1C27' }} variant="middle" component="li" />
-        <ListItem>
-          <ListItemAvatar>
-            <img src={ClounRainLight} alt="Thermometer Icon" />
-          </ListItemAvatar>
-          <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="Probability of rain" />
-          <ListItemSecondaryAction>
-            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">0%</Typography>
-          </ListItemSecondaryAction>
-        </ListItem>
+      <ProbabilityOfRain/> 
         <Divider sx={{ borderColor: '#1C1C27' }} variant="middle" component="li" />
-        <ListItem>
-          <ListItemAvatar>
-            <img src={WindLight} alt="Wind speed" />
-          </ListItemAvatar>
-          <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="Wind speed" />
-          <ListItemSecondaryAction>
-            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">8 km/h</Typography>
-          </ListItemSecondaryAction>
-        </ListItem>
+      <WindSpeed/> 
         <Divider sx={{ borderColor: '#1C1C27' }} variant="middle" component="li" />
-        <ListItem>
-          <ListItemAvatar>
-            <img src={DropLight} alt="Thermometer Icon" />
-          </ListItemAvatar>
-          <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="Air humidity" />
-          <ListItemSecondaryAction>
-            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">40%</Typography>
-          </ListItemSecondaryAction>
-        </ListItem>
+      <AirHumidity/>
         <Divider sx={{ borderColor: '#1C1C27' }} variant="middle" component="li" />
-        <ListItem>
-          <ListItemAvatar>
-            <img src={SunDumLight} alt="Thermometer Icon" />
-          </ListItemAvatar>
-          <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="UV Index" />
-          <ListItemSecondaryAction>
-            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">5</Typography>
-          </ListItemSecondaryAction>
-        </ListItem>
+      <UVIndex/>
       </List>
 
       <Card
