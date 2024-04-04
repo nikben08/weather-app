@@ -37,16 +37,21 @@ function WeatherForcastPage() {
   console.log(cityWeatherData);
 
   return (
-    <Grid>
+    <Grid container item xl={12} style={{ height: '100%' }}>
       {cityWeatherData?.list.map((weatherData, index) => (
-        <div>
         <Fragment key={index}>
-          <CityWeatherForcastCard weatherData={weatherData} />
-          <CityWeatherStatisticsChart weatherData={weatherData} />
+          <Grid sx={{marginTop: 2}} item container>
+            <Grid item>
+              <CityWeatherForcastCard weatherData={weatherData} />
+            </Grid>
+            <Grid item>
+              <CityWeatherStatisticsChart weatherData={weatherData} />
+            </Grid>
+          </Grid>
           <CityWeatherStatistics weatherData={weatherData} />
           <CityWeatherNextDaysCard weatherData={weatherData} />
+
         </Fragment>
-        </div>
       ))}
     </Grid>
   );
