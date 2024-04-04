@@ -4,7 +4,7 @@ import DayFewCloudsImage from '../assets/weather-day-few-clouds.png';
 import DayCloudyImage from '../assets/weather-day-cloudy.png';
 import DayClearImage from '../assets/weather-day-clear.png';
 
-export default function CityWeatherNextDaysCard() {
+export default function CityWeatherNextDaysCard(weatherData: any) {
     const isDesktop = useMediaQuery('(min-width: 900px)'); // Change breakpoint as needed
     return (
         <Card

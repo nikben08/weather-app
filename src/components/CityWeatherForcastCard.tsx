@@ -1,9 +1,34 @@
 import { Card, CardContent, Grid, Typography, useMediaQuery } from "@mui/material";
 import DayStormImage from '../assets/weather-day-storm.png';
 import Image from '../images/weather-forcasting-card-background.png';
+import { ICityWeatherData } from "../app/types";
 
-export default function CityWeatherForcastCard() {
+type CityWeatherStatisticsProps = {
+    weatherData: ICityWeatherData['list'][number];
+};
+
+export default function CityWeatherStatistics({ weatherData }: CityWeatherStatisticsProps) {
+    console.log(weatherData);
     const isDesktop = useMediaQuery('(min-width: 900px)'); // Change breakpoint as needed
+    const temperatureInCelsius = weatherData.main.temp - 273.15;
+    const minTemperatureInCelsius = weatherData.main.temp - 273.15;
+    const maxTemperatureInCelsius = weatherData.main.temp - 273.15;
+    const weatherDescription = weatherData.weather[0].description;
+    const cityName = weatherData.name;
+    const countryName = weatherData.sys.country;
+
+    const timestampInMillis = weatherData.dt * 1000;
+    
+    // Create a new Date object with the adjusted timestamp
+    const localDateTime = new Date(timestampInMillis + weatherData.sys.timezone * 1000);
+    
+    // Format the date and time
+    const formattedDateTime = localDateTime.toLocaleString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
     return (
         <Card
             sx={{
@@ -38,7 +63,7 @@ export default function CityWeatherForcastCard() {
                             textAlign: 'left'
                         }}
                     >
-                        Istanbul, TR
+                        {cityName}, {countryName}
                     </Typography>
                     <Typography
                         variant="body2"
@@ -50,7 +75,7 @@ export default function CityWeatherForcastCard() {
                             textAlign: 'left'
                         }}
                     >
-                        Monday, May 15, 2023
+                        {formattedDateTime}
                     </Typography>
                 </Grid>
 
@@ -64,11 +89,10 @@ export default function CityWeatherForcastCard() {
                                     fontFamily: 'Nunito',
                                     fontSize: 52,
                                     fontWeight: 700,
-                                    marginLeft: 1,
                                     textAlign: 'left'
                                 }}
                             >
-                                28ºc
+                                  {temperatureInCelsius.toFixed(0)}ºc
                             </Typography>
                             <Typography
                                 variant="body2"
@@ -76,11 +100,11 @@ export default function CityWeatherForcastCard() {
                                     fontFamily: 'Nunito',
                                     fontSize: 22,
                                     fontWeight: 400,
-                                    marginLeft: 1,
+                                    marginLeft: 0.5,
                                     textAlign: 'left',
                                 }}
                             >
-                                26ºc / 32ºc
+                                {minTemperatureInCelsius.toFixed(0)}ºc / {maxTemperatureInCelsius.toFixed(0)}ºc
                             </Typography>
                             <Typography
                                 variant="body2"
@@ -92,7 +116,7 @@ export default function CityWeatherForcastCard() {
                                     textAlign: 'left'
                                 }}
                             >
-                                Few clouds
+                                {weatherDescription}
                             </Typography>
                         </Grid>
                     </Grid>

@@ -1,8 +1,8 @@
 import { ListItem, ListItemAvatar, ListItemText, ListItemSecondaryAction, Typography } from '@mui/material';
-import { itemTextStyle , itemTypographyStyle} from './styles.tsx'; // Stil objesini import ediyoruz
+import { itemTextStyle, itemTypographyStyle } from './styles.tsx'; // Stil objesini import ediyoruz
 import WindLight from '../assets/phosphor-wind-light.svg';
 
-export default function WindSpeed()  {
+export default function WindSpeed({ windSpeed }: { windSpeed: number }) {
   return (
     <ListItem>
       <ListItemAvatar>
@@ -10,7 +10,7 @@ export default function WindSpeed()  {
       </ListItemAvatar>
       <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="Wind speed" />
       <ListItemSecondaryAction>
-      <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">0%</Typography>
+        <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">{windSpeed}%</Typography>
       </ListItemSecondaryAction>
     </ListItem>
   );

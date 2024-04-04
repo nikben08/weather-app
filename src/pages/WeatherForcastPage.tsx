@@ -1,5 +1,5 @@
-import { Grid } from "@mui/material";
-import { useEffect } from "react";
+import { Card, Grid } from "@mui/material";
+import { Fragment, useEffect } from "react";
 import { useSelectedCityIds } from "../stores/WeatherForcastingStore";
 import { getCitiesWeatherDataReq } from "../api/getCitiesReq";
 import { useQuery } from "react-query";
@@ -15,13 +15,13 @@ import CityWeatherNextDaysCard from "../components/CityWeatherNextDaysCard";
 function WeatherForcastPage() {
   const navigate = useNavigate();
   const selectedCityIds = useSelectedCityIds();
-  console.log(selectedCityIds);
 
   useEffect(() => {
-    if (selectedCityIds === undefined){
+    if (selectedCityIds === undefined) {
       navigate('/');
     }
   }, []);
+
   const {
     data: cityWeatherData,
     isLoading: isCityWeatherDataLoading,
@@ -37,11 +37,17 @@ function WeatherForcastPage() {
   console.log(cityWeatherData);
 
   return (
-    <Grid container item xl={12} style={{ height: '100%' }}>
-      <CityWeatherForcastCard />
-      <CityWeatherStatisticsChart />
-      <CityWeatherStatistics />
-      <CityWeatherNextDaysCard />
+    <Grid>
+      {cityWeatherData?.list.map((weatherData, index) => (
+        <div>
+        <Fragment key={index}>
+          <CityWeatherForcastCard weatherData={weatherData} />
+          <CityWeatherStatisticsChart weatherData={weatherData} />
+          <CityWeatherStatistics weatherData={weatherData} />
+          <CityWeatherNextDaysCard weatherData={weatherData} />
+        </Fragment>
+        </div>
+      ))}
     </Grid>
   );
 }

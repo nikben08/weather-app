@@ -6,7 +6,7 @@ import { ChartsXAxis } from "@mui/x-charts/ChartsXAxis";
 import { LinePlot, MarkPlot } from "@mui/x-charts/LineChart";
 import { ChartsGrid } from "@mui/x-charts/ChartsGrid";
 
-export default function CityWeatherStatisticsChart() {
+export default function CityWeatherStatisticsChart(weatherData: any) {
     const isDesktop = useMediaQuery('(min-width: 900px)');
 
     const dataset = [
@@ -38,7 +38,7 @@ export default function CityWeatherStatisticsChart() {
                 ...(isDesktop && {
                     width: 820,
                     height: 350,
-                    marginLeft: 3
+                    marginLeft: 2,
                 }),
             }}
         >

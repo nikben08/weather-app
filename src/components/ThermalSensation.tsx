@@ -2,7 +2,7 @@
 import ThermometerSimpleLight from '../assets/phosphor-thermometer-simple-light.svg';
 import { ListItemAvatar, ListItemText, ListItemSecondaryAction,ListItem, Typography } from '@mui/material';
 import { itemTextStyle, itemTypographyStyle } from './styles';
-export default function ThermalSensation() {
+export default function ThermalSensation({thermalSensationCelsius}: {thermalSensationCelsius: number}) {
   return (
     <div>
    <ListItem>
@@ -11,7 +11,7 @@ export default function ThermalSensation() {
           </ListItemAvatar>
           <ListItemText disableTypography sx={{ ...itemTextStyle }} primary="Thermal sensation" />
           <ListItemSecondaryAction>
-            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">26ºc</Typography>
+            <Typography sx={{ ...itemTypographyStyle }} variant="body2" color="text.secondary">{thermalSensationCelsius}ºc</Typography>
           </ListItemSecondaryAction>
         </ListItem>
     
