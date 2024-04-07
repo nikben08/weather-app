@@ -1,4 +1,4 @@
-import { Card, Grid } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Card, Grid } from "@mui/material";
 import { Fragment, useEffect } from "react";
 import { useSelectedCityIds } from "../stores/WeatherForcastingStore";
 import { getCitiesWeatherDataReq } from "../api/getCitiesReq";
@@ -34,24 +34,29 @@ function WeatherForcastPage() {
     ) => ICityWeatherData,
   });
 
-  console.log(cityWeatherData);
-
   return (
     <Grid container item xl={12} style={{ height: '100%' }}>
       {cityWeatherData?.list.map((weatherData, index) => (
-        <Fragment key={index}>
-          <Grid sx={{marginTop: 2}} item container>
-            <Grid item>
-              <CityWeatherForcastCard weatherData={weatherData} />
-            </Grid>
-            <Grid item>
-              <CityWeatherStatisticsChart weatherData={weatherData} />
-            </Grid>
-          </Grid>
-          <CityWeatherStatistics weatherData={weatherData} />
-          <CityWeatherNextDaysCard weatherData={weatherData} />
+        <Accordion key={index} defaultExpanded={index === 0} sx={{backgroundColor: 'transparent'}}>
+          <AccordionSummary id="panel-header" aria-controls="panel-content">
+            {weatherData.name}
+          </AccordionSummary>
+          <AccordionDetails>
+            <Fragment key={index}>
+              <Grid sx={{ marginTop: 2 }} item container>
+                <Grid item>
+                  <CityWeatherForcastCard weatherData={weatherData} />
+                </Grid>
+                <Grid item>
+                  <CityWeatherStatisticsChart weatherData={weatherData} />
+                </Grid>
+              </Grid>
+              <CityWeatherStatistics weatherData={weatherData} />
+              <CityWeatherNextDaysCard weatherData={weatherData} />
 
-        </Fragment>
+            </Fragment>
+          </AccordionDetails>
+        </Accordion>
       ))}
     </Grid>
   );

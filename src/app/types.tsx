@@ -55,3 +55,22 @@ export interface ICityWeatherData {
         name: string;
     }[];
 }
+
+
+export interface ICityNextDaysWeatherData {
+    city: {
+        timezone: number;
+    },
+    cnt: number;
+    list: {
+        temp: {
+            day: number;
+            min: number;
+            max: number;
+            night: number;
+            eve: number;
+            morn: number;
+        };
+        dt: number;
+    }[];
+}

@@ -50,10 +50,6 @@ function AppBarCitySelect() {
             const filtered = cities
                 .filter(option => option.name.toLowerCase().includes(searchValue.toLowerCase()))
                 .slice(0, limit);
-            // setFilteredOptions(filtered);
-            console.log('------------ filtered cities -----------');
-            console.log(filtered);
-            console.log('------------------------');
             return filtered;
         } else {
             return [];

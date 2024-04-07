@@ -8,7 +8,6 @@ type CityWeatherStatisticsProps = {
 };
 
 export default function CityWeatherStatistics({ weatherData }: CityWeatherStatisticsProps) {
-    console.log(weatherData);
     const isDesktop = useMediaQuery('(min-width: 900px)'); // Change breakpoint as needed
     const temperatureInCelsius = weatherData.main.temp - 273.15;
     const minTemperatureInCelsius = weatherData.main.temp - 273.15;

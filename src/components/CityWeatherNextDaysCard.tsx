@@ -3,9 +3,44 @@ import DayStormImage from '../assets/weather-day-storm.png';
 import DayFewCloudsImage from '../assets/weather-day-few-clouds.png';
 import DayCloudyImage from '../assets/weather-day-cloudy.png';
 import DayClearImage from '../assets/weather-day-clear.png';
+import { getCityNextDaysWeatherReq } from "../api/getCitiesReq";
+import { useQuery } from "react-query";
+import parseResponse from "../functions/parseResponse";
+import { ApiResponse, ICityNextDaysWeatherData, ICityWeatherData } from "../app/types";
 
-export default function CityWeatherNextDaysCard(weatherData: any) {
+type CityWeatherStatisticsProps = {
+    weatherData: ICityWeatherData['list'][number];
+};
+
+export default function CityWeatherNextDaysCard({ weatherData }: CityWeatherStatisticsProps) {
     const isDesktop = useMediaQuery('(min-width: 900px)'); // Change breakpoint as needed
+
+    const {
+        data: cityNextDaysWeatherData,
+        isLoading: isCityNextDaysWeatherDataLoading,
+        refetch: refetchCityNextDaysWeatherData,
+    } = useQuery("get/CityNextDaysWeatherData", () => getCityNextDaysWeatherReq({ lat: weatherData.coord.lat.toString(), lon: weatherData.coord.lon.toString() }), {
+        cacheTime: 0,
+        retry: 1,
+        select: parseResponse as (
+            response: ApiResponse<ICityNextDaysWeatherData>
+        ) => ICityNextDaysWeatherData,
+    });
+    console.log(cityNextDaysWeatherData);
+
+    const getWeekDay = (dt: number): string => {
+        if (cityNextDaysWeatherData) {
+            const timestampInMillis = dt * 1000;
+            const localDateTime = new Date(timestampInMillis + cityNextDaysWeatherData?.city.timezone * 1000);
+            const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(localDateTime);
+            return weekday;
+        }
+    
+        return 'undefined';
+    };
+    
+    
+
     return (
         <Card
             sx={{
@@ -19,91 +54,16 @@ export default function CityWeatherNextDaysCard(weatherData: any) {
             }}>
             <CardContent sx={{ backgroundColor: '#16161F', }}>
                 <Grid container spacing={1}>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Mon</Typography>
-                        <img src={DayStormImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">20°C</Typography>
-                        <Typography variant="body2">18°C</Typography>
-                    </Grid>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Tue</Typography>
-                        <img src={DayFewCloudsImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">22°C</Typography>
-                        <Typography variant="body2">20°C</Typography>
-                    </Grid>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Tue</Typography>
-                        <img src={DayFewCloudsImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">22°C</Typography>
-                        <Typography variant="body2">20°C</Typography>
-                    </Grid>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Tue</Typography>
-                        <img src={DayCloudyImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">22°C</Typography>
-                        <Typography variant="body2">20°C</Typography>
-                    </Grid>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Tue</Typography>
-                        <img src={DayClearImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">22°C</Typography>
-                        <Typography variant="body2">20°C</Typography>
-                    </Grid>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Tue</Typography>
-                        <img src={DayClearImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">22°C</Typography>
-                        <Typography variant="body2">20°C</Typography>
-                    </Grid>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Tue</Typography>
-                        <img src={DayFewCloudsImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">22°C</Typography>
-                        <Typography variant="body2">20°C</Typography>
-                    </Grid>
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Tue</Typography>
-                        <img src={DayFewCloudsImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">22°C</Typography>
-                        <Typography variant="body2">20°C</Typography>
-                    </Grid>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Mon</Typography>
-                        <img src={DayStormImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">20°C</Typography>
-                        <Typography variant="body2">18°C</Typography>
-                    </Grid>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Tue</Typography>
-                        <img src={DayFewCloudsImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">22°C</Typography>
-                        <Typography variant="body2">20°C</Typography>
-                    </Grid>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Tue</Typography>
-                        <img src={DayFewCloudsImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">22°C</Typography>
-                        <Typography variant="body2">20°C</Typography>
-                    </Grid>
-
-                    <Grid item xs={3} xl={1}>
-                        <Typography variant="h6">Tue</Typography>
-                        <img src={DayCloudyImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                        <Typography variant="body1">22°C</Typography>
-                        <Typography variant="body2">20°C</Typography>
-                    </Grid>
-
-
+                    {cityNextDaysWeatherData?.list.map((weatherData, index) => (
+                        <Grid item xs={3} xl={1}>
+                            <Typography variant="h6">
+                                {getWeekDay(weatherData.dt)}
+                            </Typography>
+                            <img src={DayStormImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
+                            <Typography variant="body1">{(weatherData.temp.max - 273.15).toFixed(0)}°C</Typography>
+                            <Typography variant="body2">{(weatherData.temp.min - 273.15).toFixed(0)}°C</Typography>
+                        </Grid>
+                    ))}
                 </Grid>
             </CardContent>
         </Card>

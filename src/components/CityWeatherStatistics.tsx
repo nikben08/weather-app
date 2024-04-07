@@ -7,9 +7,6 @@ import UVIndex from "./UVIndex";
 
 export default function CityWeatherStatistics(weatherData: any) {
     const isDesktop = useMediaQuery('(min-width: 900px)');
-    console.log('------------');
-    console.log(weatherData);
-    console.log('-----------------')
     const { wind, main } = weatherData;
     const windSpeed = wind?.speed;
     const airHumidity = main?.humidity;
