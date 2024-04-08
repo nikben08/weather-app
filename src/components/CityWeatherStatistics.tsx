@@ -17,7 +17,7 @@ export default function CityWeatherStatistics(weatherData: any) {
         <List
             sx={{
                 py: 0,
-                width: 1200,
+                width: '80vw',
                 marginTop: 2,
                 borderRadius: 2,
                 borderColor: 'divider',
@@ -37,7 +37,7 @@ export default function CityWeatherStatistics(weatherData: any) {
             <Divider sx={{ borderColor: '#1C1C27' }} variant="middle" component="li" />
             <AirHumidity airHumidity={airHumidity} />
             <Divider sx={{ borderColor: '#1C1C27' }} variant="middle" component="li" />
-            <UVIndex uvIndex={1}/>
+            <UVIndex uvIndex={1} />
         </List>
     )
 }

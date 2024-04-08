@@ -35,33 +35,35 @@ export default function CityWeatherNextDaysCard({ weatherData }: CityWeatherStat
             const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(localDateTime);
             return weekday;
         }
-    
+
         return 'undefined';
     };
-    
+
     return (
         <Card
             sx={{
-                width: '100%',
-                height: 300,
+                width: '80vw',
                 marginTop: 2,
                 backgroundColor: '#16161F',
                 ...(isDesktop && {
-                    height: 160,
+                    height: 155,
+                    width: '100%',
                 }),
             }}>
             <CardContent sx={{ backgroundColor: '#16161F', }}>
-                <Grid container spacing={1}>
-                    {cityNextDaysWeatherData?.list.map((nextDaysWeatherData, index) => (
-                        <Grid item xs={3} xl={1}>
-                            <Typography variant="h6">
-                                {getWeekDay(nextDaysWeatherData.dt)}
-                            </Typography>
-                            <img src={DayStormImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                            <Typography variant="body1">{(nextDaysWeatherData.temp.max - 273.15).toFixed(0)}°C</Typography>
-                            <Typography variant="body2">{(nextDaysWeatherData.temp.min - 273.15).toFixed(0)}°C</Typography>
-                        </Grid>
-                    ))}
+                <Grid container>
+                    {cityNextDaysWeatherData?.list
+                        .slice(0, isDesktop ? 12 : 4)
+                        .map((nextDaysWeatherData, index) => (
+                            <Grid item xs={3} sm={1}>
+                                <Typography variant="h6">
+                                    {getWeekDay(nextDaysWeatherData.dt)}
+                                </Typography>
+                                <img src={DayStormImage} style={{ margin: '0 auto', width: 56, height: 56 }} />
+                                <Typography variant="body1">{(nextDaysWeatherData.temp.max - 273.15).toFixed(0)}°C</Typography>
+                                <Typography variant="body2">{(nextDaysWeatherData.temp.min - 273.15).toFixed(0)}°C</Typography>
+                            </Grid>
+                        ))}
                 </Grid>
             </CardContent>
         </Card>

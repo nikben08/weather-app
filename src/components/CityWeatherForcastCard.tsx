@@ -35,7 +35,7 @@ export default function CityWeatherStatistics({ weatherData }: CityWeatherStatis
                 backgroundImage: `url(${Image})`,
                 backgroundSize: '100% 100%',
                 backgroundPosition: 'center',
-                width: 1200,
+                width: '100vw',
                 ...(isDesktop && {
                     width: 350,
                     height: 350,
@@ -80,7 +80,7 @@ export default function CityWeatherStatistics({ weatherData }: CityWeatherStatis
 
 
                 <Grid container direction="row" alignItems="center">
-                    <Grid item xs={6}>
+                    <Grid item xs={5} md={7}>
                         <Grid container direction="column" alignItems="flex-start">
                             <Typography
                                 variant="body1"
@@ -119,8 +119,8 @@ export default function CityWeatherStatistics({ weatherData }: CityWeatherStatis
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Grid item xs={6}>
-                        <img src={DayStormImage} style={{ width: 150, height: 150, marginLeft: 20 }} />
+                    <Grid xs={5} md={5}>
+                        <img src={DayStormImage} style={{ width: 150, height: 150 }} />
                     </Grid>
                 </Grid>
 
