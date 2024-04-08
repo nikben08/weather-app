@@ -36,7 +36,7 @@ export default function CityWeatherStatisticsChart(weatherData: any) {
                 height: 0,
                 width: 0,
                 ...(isDesktop && {
-                    width: 830,
+                    width: 834,
                     height: 350,
                     marginLeft: 2,
                 }),

@@ -37,13 +37,13 @@ function WeatherForcastPage() {
   return (
     <Grid container item xl={12} style={{ height: '100%' }}>
       {cityWeatherData?.list.map((weatherData, index) => (
-        <Accordion key={index} defaultExpanded={index === 0} sx={{backgroundColor: 'transparent'}}>
-          <AccordionSummary id="panel-header" aria-controls="panel-content">
+        <Accordion key={index} defaultExpanded={index === 0} sx={{ backgroundColor: '#131319' }}>
+          <AccordionSummary id="panel-header" aria-controls="panel-content" sx={{ backgroundColor: '#1C1C27' }}>
             {weatherData.name}
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ backgroundColor: '#131319', padding: 0 }}>
             <Fragment key={index}>
-              <Grid sx={{ marginTop: 2 }} item container>
+              <Grid sx={{ paddingTop: 2 }} item container>
                 <Grid item>
                   <CityWeatherForcastCard weatherData={weatherData} />
                 </Grid>

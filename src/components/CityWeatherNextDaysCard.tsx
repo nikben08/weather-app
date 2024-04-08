@@ -19,7 +19,7 @@ export default function CityWeatherNextDaysCard({ weatherData }: CityWeatherStat
         data: cityNextDaysWeatherData,
         isLoading: isCityNextDaysWeatherDataLoading,
         refetch: refetchCityNextDaysWeatherData,
-    } = useQuery("get/CityNextDaysWeatherData", () => getCityNextDaysWeatherReq({ lat: weatherData.coord.lat.toString(), lon: weatherData.coord.lon.toString() }), {
+    } = useQuery("get/CityNextDaysWeatherData&cityId=" + weatherData.id.toString(), () => getCityNextDaysWeatherReq({ lat: weatherData.coord.lat.toString(), lon: weatherData.coord.lon.toString() }), {
         cacheTime: 0,
         retry: 1,
         select: parseResponse as (
@@ -39,8 +39,6 @@ export default function CityWeatherNextDaysCard({ weatherData }: CityWeatherStat
         return 'undefined';
     };
     
-    
-
     return (
         <Card
             sx={{
@@ -54,14 +52,14 @@ export default function CityWeatherNextDaysCard({ weatherData }: CityWeatherStat
             }}>
             <CardContent sx={{ backgroundColor: '#16161F', }}>
                 <Grid container spacing={1}>
-                    {cityNextDaysWeatherData?.list.map((weatherData, index) => (
+                    {cityNextDaysWeatherData?.list.map((nextDaysWeatherData, index) => (
                         <Grid item xs={3} xl={1}>
                             <Typography variant="h6">
-                                {getWeekDay(weatherData.dt)}
+                                {getWeekDay(nextDaysWeatherData.dt)}
                             </Typography>
                             <img src={DayStormImage} style={{ width: 56, height: 56, margin: '0 auto' }} />
-                            <Typography variant="body1">{(weatherData.temp.max - 273.15).toFixed(0)}°C</Typography>
-                            <Typography variant="body2">{(weatherData.temp.min - 273.15).toFixed(0)}°C</Typography>
+                            <Typography variant="body1">{(nextDaysWeatherData.temp.max - 273.15).toFixed(0)}°C</Typography>
+                            <Typography variant="body2">{(nextDaysWeatherData.temp.min - 273.15).toFixed(0)}°C</Typography>
                         </Grid>
                     ))}
                 </Grid>

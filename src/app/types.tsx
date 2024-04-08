@@ -60,6 +60,7 @@ export interface ICityWeatherData {
 export interface ICityNextDaysWeatherData {
     city: {
         timezone: number;
+        name: string;
     },
     cnt: number;
     list: {
